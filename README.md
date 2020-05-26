@@ -37,6 +37,8 @@
  > SELECT META(`test`).id AS _ID, META(`test`).cas AS _CAS, `test`.* FROM `test` WHERE `_class` = \"com.cb.model.Customer\" and phoneNumber = $1
  
  >@Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND phoneNumber = $1")
+ 
+ >#{#n1ql.selectEntity} WHERE phoneNumber = $1
 ~~~
 
 ### Find By PhoneNumberAndCardNumber:
@@ -44,4 +46,6 @@
   > SELECT META(`test`).id AS _ID, META(`test`).cas AS _CAS, `test`.* FROM `test` WHERE `_class` = \"com.cb.model.Customer\" AND phoneNumber = $2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END
  
  > @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND phoneNumber=$2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END")
+
+> #{#n1ql.selectEntity} WHERE phoneNumber=$2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1END
 ~~~
