@@ -49,3 +49,5 @@
 
 > #{#n1ql.selectEntity} WHERE phoneNumber=$2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1END
 ~~~
+### Create Index withprimary key
+CREATE PRIMARY INDEX `#primary` ON `test`
