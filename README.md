@@ -1,5 +1,9 @@
 # spring-boot-couchbase_N1QL_Query
-## Model
+
+
+## Search N1QL Queries for Couchbase
+-------------------------------------
+### Data Model
 ~~~
 {
   "phoneNumber": "1256280946",
@@ -21,22 +25,23 @@
 }
 ~~~
 
-## Find By MLC CardNo:
+### Find By MLC CardNo:
 ~~~
  > SELECT META(`test`).id AS _ID, META(`test`).cas AS _CAS, `test`.* FROM `test` WHERE ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END
 
  > @Query("#{#n1ql.selectEntity} WHERE ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END")
 ~~~
 
-## Find By PhoneNumber:
+### Find By PhoneNumber:
 ~~~
  > SELECT META(`test`).id AS _ID, META(`test`).cas AS _CAS, `test`.* FROM `test` WHERE `_class` = \"com.cb.model.Customer\" and phoneNumber = $1
  
  >@Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND phoneNumber = $1")
 ~~~
 
-## Find By PhoneNumberAndCardNumber:
+### Find By PhoneNumberAndCardNumber:
 ~~~
   > SELECT META(`test`).id AS _ID, META(`test`).cas AS _CAS, `test`.* FROM `test` WHERE `_class` = \"com.cb.model.Customer\" AND phoneNumber = $2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END
-  > @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND phoneNumber=$2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END")
+ 
+ > @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND phoneNumber=$2 AND ANY mlcCard IN mlcCards SATISFIES mlcCard.mlcCardNo = $1 END")
 ~~~
